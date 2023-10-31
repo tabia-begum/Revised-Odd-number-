@@ -1,38 +1,60 @@
-/*this is my way of implementing the task as i take its start value from 12
-and range it to 10 million*/
-//i took it to determine the difference of any given number 
+//This is an way of implementing an code to the problem
+/*Here the solution  is to create a logic to find the number that ranges 
+from zero to ten million  where it satisfies two different conditions
+1.The number needs to be a prime number 
+2. The number that is display is prime and the difference between
+the pair of the number should be one (1).*/
+/***
+* @param {determineDifference}  //have used this as my variable value
+* this will store the difference value*/
 const determineDifference = (num) => {
-    let numToArray = Array.from(num.toString());
-    let isValid = true;
-    //checking the difference between numbers 
-    numToArray.forEach((elem, i) => {
-      let condition =
-        Math.abs(+numToArray[i + 1] - +elem) != 1 && i != numToArray.length - 1;
-        //using the if condition to satisfy the difference as 1
-        
-      if (condition) {
-        isValid = false;
-      }
-      return;
-    });
-    return isValid;
-  };
-  // Generating the logic for prime numbers
-  const isPrime = (n) => {
-    let r = true;
-    for (let i = 2; i < n; i++) {
-      if (n % i == 0) {
-        r = false;
-      }
+  /**  @param {numToArray} // Used this to convert the integer to String*/
+  let numToArray = Array.from(num.toString());
+  /**@param {isValid} Given it a boolena to value to satisfy the condition*/
+  let isValid = true;
+  /*This piece of code will help us to determine the difference value 
+  for each element that will pass through the loop till it's range.*/
+  numToArray.forEach((elem, i) => {
+    /**@param {Math.abs} used for removing the negative values.*/
+    let OddNumber = Math.abs(+numToArray[i + 1] - +elem)
+      != 1 && i != numToArray.length - 1;
+    // This if condition its values accordingly.
+    if (OddNumber) {
+      /** 
+       * @param {isValid} /if the conditon is prime it returns 
+      If not prime it will return false.*/
+      isValid = false;
     }
-    return r;
-  };
-  /*printing the number that ranges from 12 to 10 millions satisying the condition
-  off being prime and consecutive and being the difference as 1 */ 
-  let finalResults = [];
-  for (i = 12; i < 10000000; i++) {
-    if (determineDifference(i) && isPrime(i)) {
-      finalResults.push(i);
+    return;
+  });
+  //calling the function isValid.
+  return isValid;
+};
+//This code is used to check if the number is prime or not
+/** 
+ * @param {isPrime} /is a function used to check wheather the number 
+ * is prime or not.
+*/
+const isPrime = (n) => {
+  let prime = true;
+  for (let i = 2; i < n; i++) {
+    if (n % i == 0) {
+      prime = false;
     }
   }
-  console.log(finalResults, finalResults.length);
+  return prime;
+};
+//storing all the results in the finalResults.
+let finalResults = [];
+/*I have intialized the range from 12 as technically as condition satisfies 
+double digits number and above*/
+for (i = 12; i < 10000000; i++) {
+  if (determineDifference(i) && isPrime(i)) {
+    /** @param {finalResults} // for storing the results in the array */
+    //Using the push() method to push  elemets in the array.
+    finalResults.push(i);
+  }
+}
+console.log(finalResults, finalResults.length);
+/*here the conditions are satisfied 
+ and is being printed by using console.log method.*/
